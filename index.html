@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Academic Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #faf7f2;
+      --warm-white: #fff9f2;
+      --ink: #1a1713;
+      --dust: #c8bfb0;
+      --terracotta: #c2714f;
+      --sage: #6b7f6e;
+      --gold: #b89a5a;
+      --light-dust: #ede8e0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 4rem;
+      background: rgba(250,247,242,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--light-dust);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.65;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-decor {
+      position: absolute; top: -80px; right: -80px;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #e8ddd0 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 3rem 6rem 4rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.4rem;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 1.6rem;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+    .hero-tagline {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #5a5248;
+      max-width: 400px;
+      margin-bottom: 2.4rem;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--terracotta);
+      padding-bottom: 4px;
+      transition: gap 0.2s;
+    }
+    .hero-cta:hover { gap: 1.1rem; }
+    .hero-right {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      padding: 4rem 3rem;
+    }
+    .hero-photo-frame {
+      position: relative;
+      width: 340px; height: 420px;
+    }
+    .hero-photo-frame::before {
+      content: '';
+      position: absolute; top: 16px; left: 16px;
+      width: 100%; height: 100%;
+      border: 1.5px solid var(--gold);
+      border-radius: 2px;
+      z-index: 0;
+    }
+    .hero-photo {
+      position: relative; z-index: 1;
+      width: 100%; height: 100%;
+      background: linear-gradient(145deg, #d9d0c4 0%, #c8bfaf 100%);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-photo-placeholder {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: #9a9080;
+      text-align: center;
+      padding: 2rem;
+      line-height: 1.8;
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-stats {
+      position: absolute; bottom: 3rem; right: -1.5rem;
+      background: var(--warm-white);
+      border: 1px solid var(--light-dust);
+      padding: 1.4rem 1.8rem;
+      display: flex; gap: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 600;
+      color: var(--terracotta);
+    }
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8a8070;
+      margin-top: 0.2rem;
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 7rem 4rem; }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 3rem;
+    }
+    .section-divider {
+      width: 48px; height: 1.5px;
+      background: var(--gold);
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--warm-white);
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #4a4540;
+      margin-bottom: 1.4rem;
+    }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+    .tag {
+      padding: 0.35rem 1rem;
+      border: 1px solid var(--dust);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: #6a6058;
+      border-radius: 100px;
+      background: var(--cream);
+    }
+    .about-details { display: flex; flex-direction: column; gap: 1.4rem; margin-top: 1rem; }
+    .detail-row { display: flex; gap: 1rem; align-items: baseline; }
+    .detail-key {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dust);
+      min-width: 110px;
+    }
+    .detail-val { font-size: 0.95rem; color: var(--ink); }
+
+    /* ── CV ── */
+    #cv { background: var(--cream); }
+    .cv-embed-box {
+      border: 1px solid var(--light-dust);
+      border-radius: 4px;
+      background: var(--warm-white);
+      padding: 3rem;
+      text-align: center;
+      color: #8a8070;
+    }
+    .cv-embed-box p { margin-bottom: 1.6rem; font-size: 0.95rem; line-height: 1.8; }
+    .cv-btn {
+      display: inline-block;
+      padding: 0.8rem 2.2rem;
+      background: var(--ink);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .cv-btn:hover { background: var(--terracotta); }
+
+    /* ── RESEARCH ── */
+    #research { background: var(--warm-white); }
+    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; }
+    .research-card {
+      padding: 2rem;
+      background: var(--cream);
+      border: 1px solid var(--light-dust);
+      border-left: 3px solid var(--terracotta);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .research-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.07);
+    }
+    .research-year {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--terracotta);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .research-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+    .research-venue {
+      font-size: 0.82rem;
+      color: #8a8070;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .research-abstract { font-size: 0.88rem; line-height: 1.75; color: #5a5248; }
+    .research-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+    }
+
+    /* ── COURSES ── */
+    #courses { background: var(--cream); }
+    .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+    .course-card {
+      padding: 1.8rem;
+      background: var(--warm-white);
+      border: 1px solid var(--light-dust);
+      border-top: 2px solid var(--sage);
+      transition: transform 0.2s;
+    }
+    .course-card:hover { transform: translateY(-3px); }
+    .course-code {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.5rem;
+    }
+    .course-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .course-desc { font-size: 0.85rem; line-height: 1.7; color: #6a6058; }
+    .course-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.73rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--warm-white); }
+    .projects-mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1.4rem;
+    }
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--cream);
+      border: 1px solid var(--light-dust);
+      padding: 2rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .project-card:first-child {
+      grid-column: span 2;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.09);
+    }
+    .project-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--light-dust);
+      position: absolute;
+      top: 1rem; right: 1.4rem;
+      line-height: 1;
+    }
+    .project-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+    }
+    .project-desc { font-size: 0.88rem; line-height: 1.75; color: #5a5248; }
+    .project-link {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--ink); color: var(--cream); }
+    #contact .section-label { color: var(--gold); }
+    #contact .section-title { color: var(--cream); }
+    #contact .section-divider { background: var(--gold); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+    .contact-info p { font-size: 1rem; line-height: 1.9; color: #c8bfb0; margin-bottom: 2rem; }
+    .contact-detail { display: flex; flex-direction: column; gap: 0.8rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: center; }
+    .contact-item-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      min-width: 70px;
+    }
+    .contact-item-val { font-size: 0.9rem; color: #d8cfc4; }
+
+    /* FORM */
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .form-input, .form-textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(200,191,176,0.25);
+      color: var(--cream);
+      padding: 0.8rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 2px;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: #6a6058; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+    .form-textarea { resize: vertical; min-height: 130px; }
+    .form-submit {
+      align-self: flex-start;
+      padding: 0.85rem 2.4rem;
+      background: var(--terracotta);
+      color: var(--cream);
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .form-submit:hover { background: #d4845f; transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #110f0d;
+      color: #6a6058;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+    footer span { color: var(--terracotta); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-left > * { animation: fadeUp 0.8s ease both; }
+    .hero-eyebrow { animation-delay: 0.1s; }
+    .hero-name    { animation-delay: 0.25s; }
+    .hero-tagline { animation-delay: 0.4s; }
+    .hero-cta     { animation-delay: 0.55s; }
+    .hero-right   { animation: fadeUp 0.9s 0.3s ease both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { gap: 1.4rem; }
+      #home { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      #about { grid-template-columns: 1fr; gap: 2rem; }
+      .research-grid { grid-template-columns: 1fr; }
+      .courses-grid { grid-template-columns: 1fr 1fr; }
+      .projects-mosaic { grid-template-columns: 1fr; }
+      .project-card:first-child { grid-column: span 1; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">Your Name</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg-decor"></div>
+  <div class="hero-left">
+    <p class="hero-eyebrow">PhD Candidate · Your University</p>
+    <h1 class="hero-name">Your<br><em>Full Name</em></h1>
+    <p class="hero-tagline">
+      I study [your field] with a focus on [your specialty]. My work explores the intersection of [topic A] and [topic B] to [your goal or impact].
+    </p>
+    <a href="#research" class="hero-cta">View my research →</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-frame">
+      <div class="hero-photo">
+        <!-- Replace the placeholder below with: <img src="your-photo.jpg" alt="Your Name"> -->
+        <div class="hero-photo-placeholder">
+          Replace this with<br>your photo:<br><br>
+          &lt;img src="photo.jpg"&gt;
+        </div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Publications</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Awards</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div>
+    <p class="section-label">About Me</p>
+    <h2 class="section-title">Scholar,<br>Researcher,<br>Educator.</h2>
+    <div class="section-divider"></div>
+    <div class="about-details">
+      <div class="detail-row">
+        <span class="detail-key">Position</span>
+        <span class="detail-val">PhD Candidate</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Department</span>
+        <span class="detail-val">Your Department</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">University</span>
+        <span class="detail-val">Your University</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Advisor</span>
+        <span class="detail-val">Prof. Advisor Name</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Email</span>
+        <span class="detail-val">you@university.edu</span>
+      </div>
+    </div>
+  </div>
+  <div class="about-text">
+    <p>
+      Welcome! I'm a [year] PhD candidate in [Department] at [University]. My research focuses on [your research area], with particular interest in [specific topic or method].
+    </p>
+    <p>
+      Before my doctoral studies, I completed my [Bachelor's/Master's] at [Previous University], where I [brief highlight]. I am passionate about [something meaningful to you] and how it connects to [broader impact].
+    </p>
+    <p>
+      Outside academia, I enjoy [hobby/interest], and I am committed to [teaching/mentorship/outreach/etc.].
+    </p>
+    <div class="about-tags">
+      <span class="tag">Research Area 1</span>
+      <span class="tag">Research Area 2</span>
+      <span class="tag">Method / Tool</span>
+      <span class="tag">Topic</span>
+      <span class="tag">Teaching</span>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv">
+  <p class="section-label">Curriculum Vitae</p>
+  <h2 class="section-title">My Academic<br>Record.</h2>
+  <div class="section-divider"></div>
+  <div class="cv-embed-box">
+    <p>
+      Paste a Google Docs embed code here, or replace this block with an<br>
+      <code>&lt;iframe&gt;</code> from your Google Drive CV.<br><br>
+      In Google Docs: <strong>File → Share → Publish to web → Embed</strong>, then paste the iframe code here.
+    </p>
+    <!-- PASTE YOUR GOOGLE DOCS IFRAME HERE, e.g.: -->
+    <!-- <iframe src="https://docs.google.com/document/d/YOUR_DOC_ID/preview" width="100%" height="700" style="border:none;"></iframe> -->
+    <a href="#" class="cv-btn">Download PDF Version</a>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <p class="section-label">Research & Publications</p>
+  <h2 class="section-title">Work &<br>Findings.</h2>
+  <div class="section-divider"></div>
+  <div class="research-grid">
+
+    <div class="research-card">
+      <div class="research-year">2024</div>
+      <div class="research-title">Title of Your First Paper</div>
+      <div class="research-venue">Journal or Conference Name, Vol. X</div>
+      <p class="research-abstract">A brief 1–2 sentence description of what this paper is about and what you found or contributed. Keep it accessible.</p>
+      <a href="#" class="research-link">Read paper →</a>
+    </div>
+
+    <div class="research-card">
+      <div class="research-year">2023</div>
+      <div class="research-title">Title of Your Second Paper</div>
+      <div class="research-venue">Journal or Conference Name</div>
+      <p class="research-abstract">A brief 1–2 sentence description of what this paper is about and what you found or contributed.</p>
+      <a href="#" class="research-link">Read paper →</a>
+    </div>
+
+    <div class="research-card">
+      <div class="research-year">2023</div>
+      <div class="research-title">Title of Another Publication</div>
+      <div class="research-venue">Workshop / Symposium Name</div>
+      <p class="research-abstract">A brief 1–2 sentence description of this publication's focus and contribution to the field.</p>
+      <a href="#" class="research-link">Read paper →</a>
+    </div>
+
+    <div class="research-card">
+      <div class="research-year">2022</div>
+      <div class="research-title">Earlier Work or Preprint</div>
+      <div class="research-venue">arXiv / Preprint</div>
+      <p class="research-abstract">A brief description of this work — what problem it addresses and the approach you took.</p>
+      <a href="#" class="research-link">Read paper →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <p class="section-label">Teaching & Course Materials</p>
+  <h2 class="section-title">Courses I<br>Teach.</h2>
+  <div class="section-divider"></div>
+  <div class="courses-grid">
+
+    <div class="course-card">
+      <div class="course-code">DEPT 101</div>
+      <div class="course-name">Introduction to Your Field</div>
+      <p class="course-desc">An accessible introduction to the core concepts of [field], designed for undergraduates with no prior background.</p>
+      <a href="#" class="course-link">View materials →</a>
+    </div>
+
+    <div class="course-card">
+      <div class="course-code">DEPT 302</div>
+      <div class="course-name">Advanced Topic in Research</div>
+      <p class="course-desc">A graduate-level seminar exploring cutting-edge methods and debates in [research area].</p>
+      <a href="#" class="course-link">View syllabus →</a>
+    </div>
+
+    <div class="course-card">
+      <div class="course-code">DEPT 215</div>
+      <div class="course-name">Methods & Analysis</div>
+      <p class="course-desc">Hands-on training in research methods, data collection, and quantitative/qualitative analysis.</p>
+      <a href="#" class="course-link">View materials →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Projects & Initiatives</p>
+  <h2 class="section-title">Things I've<br>Built.</h2>
+  <div class="section-divider"></div>
+  <div class="projects-mosaic">
+
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-tag">Featured · Ongoing</div>
+      <div class="project-title">Your Flagship Project Name</div>
+      <p class="project-desc">A longer description of your most important or most recent project. Describe what it is, what you did, what tools or methods you used, and what impact it had or aims to have. This card is wider to give it more visual weight.</p>
+      <a href="#" class="project-link">Explore project →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-tag">Research Tool</div>
+      <div class="project-title">Second Project</div>
+      <p class="project-desc">Brief description of this project, what it does, and why it matters.</p>
+      <a href="#" class="project-link">View →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-tag">Dataset / Resource</div>
+      <div class="project-title">Third Project</div>
+      <p class="project-desc">Brief description of this project, dataset, or resource you've created or contributed to.</p>
+      <a href="#" class="project-link">Access →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-tag">Collaboration</div>
+      <div class="project-title">Collaborative Work</div>
+      <p class="project-desc">A collaborative project with other researchers or institutions worth highlighting here.</p>
+      <a href="#" class="project-link">Learn more →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get in Touch</p>
+  <h2 class="section-title">Let's Connect.</h2>
+  <div class="section-divider"></div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p>
+        I welcome collaboration inquiries, speaking invitations, and messages from students interested in my research. Feel free to reach out.
+      </p>
+      <div class="contact-detail">
+        <div class="contact-item">
+          <span class="contact-item-label">Email</span>
+          <span class="contact-item-val">you@university.edu</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Office</span>
+          <span class="contact-item-val">Building Name, Room 000</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Scholar</span>
+          <span class="contact-item-val">Google Scholar Profile</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">ORCID</span>
+          <span class="contact-item-val">0000-0000-0000-0000</span>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" placeholder="Jane" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" placeholder="Smith" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" placeholder="jane@example.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Subject</label>
+        <input type="text" class="form-input" placeholder="Collaboration / Question / Other" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" placeholder="Your message here..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  © 2025 <span>Your Name</span> · Built with Google Sites · All rights reserved
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert("Thank you for your message! I'll be in touch soon.");
+    e.target.reset();
+  }
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.research-card, .course-card, .project-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
